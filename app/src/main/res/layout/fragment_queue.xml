@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawerlayout"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:layoutDescription="@xml/queue_motion_description">
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/nav_view"
+        app:menu="@menu/menu"
+        app:headerLayout="@layout/header"
+        android:layout_gravity="start"/>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/toolBar12"
+        app:title="QR SCANNER &amp; GENERATOR"
+        app:titleTextColor="#515C6F"
+        />
+
+ <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/download_url_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textUri"
+            android:layout_marginTop="30dp"
+            android:singleLine="true" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+    <Button
+        android:id="@+id/save_cta"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_padding"
+        android:enabled="false"
+        android:text="@string/start"
+        android:translationZ="@dimen/default_toolbar_elevation"
+        app:layout_constraintEnd_toEndOf="@id/download_url_input_layout"
+        app:layout_constraintTop_toBottomOf="@id/download_url_input_layout" />
+        <Button
+            android:id="@+id/paste"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_padding"
+            android:enabled="false"
+            android:text="Paste"
+            android:translationZ="@dimen/default_toolbar_elevation"
+            app:layout_constraintEnd_toEndOf="@id/download_url_input_layout"
+            app:layout_constraintTop_toBottomOf="@id/download_url_input_layout" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Ad Here"
+        android:textColor="#000"
+        android:background="@drawable/magcardshape"
+        android:backgroundTint="#efefef"
+        android:textSize="15sp"
+
+        />
+</LinearLayout>
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

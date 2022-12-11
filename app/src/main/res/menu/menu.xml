@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group android:checkableBehavior="single">
+    <item android:id="@+id/home123"
+        android:title="Home"
+        android:icon="@drawable/download"/>
+    <item android:id="@+id/scan"
+        android:title="Download"
+        android:icon="@drawable/ic_round_refresh"/>
+</group>
+</menu>

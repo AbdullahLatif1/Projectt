@@ -1,0 +1,2 @@
+rootProject.name = "Tiktok Video Downloader"
+include ':app'

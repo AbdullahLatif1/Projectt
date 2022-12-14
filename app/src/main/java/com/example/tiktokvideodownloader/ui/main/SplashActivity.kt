@@ -2,6 +2,7 @@ package com.example.tiktokvideodownloader.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.os.Handler
 import android.view.View
 import android.widget.ProgressBar
@@ -21,7 +22,9 @@ class SplashActivity : AppCompatActivity() {
     var text: TextView? = null
     var progressStatus = 0
     var intent_id = 0
+    private val COUNTER_TIME: Long = 3
     var handler = Handler()
+    private var secondsRemaining: Long = 0
     private val permissionRequester: PermissionRequester by lazy {
         ServiceLocator.permissionModule.permissionRequester
     }
@@ -30,7 +33,7 @@ class SplashActivity : AppCompatActivity() {
         permissionRequester(this)
         stopService(QueueService.buildIntent(this))
         setContentView(R.layout.activity_splash)
-        App1.load_inter(applicationContext)
+        MyApplication.load_inter(applicationContext)
         progressBar = findViewById<View>(R.id.progressBar1) as ProgressBar
         text = findViewById<TextView>(R.id.getSTartedBtn) as TextView
         Thread {
@@ -55,6 +58,38 @@ class SplashActivity : AppCompatActivity() {
 
         }
     }
+    private fun createTimer(seconds: Long) {
+        val countDownTimer: CountDownTimer = object : CountDownTimer(seconds * 1000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                secondsRemaining = millisUntilFinished / 1000 + 1
+                //counterTextView.setText("App is done loading in: " + secondsRemaining);
+            }
+
+            override fun onFinish() {
+                secondsRemaining = 0
+                //counterTextView.setText("Done.");
+                val application = application
+
+                // If the application is not an instance of MyApplication, log an error message and
+                // start the MainActivity without showing the app open ad.
+                if (application !is MyApplication) {
+                    // Log.e(LOG_TAG, "Failed to cast application to MyApplication.");
+                    return
+                }
+
+                // Show the app open ad.
+                application
+                    .showAdIfAvailable(
+                        this@SplashActivity,
+                        object : MyApplication.OnShowAdCompleteListener {
+                            override fun onShowAdComplete() {
+                            }
+                        })
+            }
+        }
+        countDownTimer.start()
+    }
+
     fun all_files11(){
         intent_id = 1
         show_full_screen_ad()

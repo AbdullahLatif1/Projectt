@@ -20,7 +20,7 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 
 
 public class App1 extends Application {
-    public static InterstitialAd mInterstitialAd;
+        public static InterstitialAd mInterstitialAd;
 
     @Override
     public void onCreate() {

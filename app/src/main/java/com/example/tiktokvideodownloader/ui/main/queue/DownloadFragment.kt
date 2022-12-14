@@ -11,10 +11,12 @@ import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tiktokvideodownloader.R
 import com.example.tiktokvideodownloader.data.model.VideoState
 import com.example.tiktokvideodownloader.di.provideViewModels
+import com.example.tiktokvideodownloader.ui.main.rvadapter.AdmobNativeAdAdapter
 import com.google.android.material.snackbar.Snackbar
 
 class DownloadFragment : Fragment() {
@@ -52,6 +54,11 @@ class DownloadFragment : Fragment() {
             requireContext()
         )
         recycler.adapter = adapter
+       val admobNativeAdAdapter =AdmobNativeAdAdapter.Builder.with("ca-app-pub-3940256099942544/2247696110",adapter,
+       "small").adItemInterval(2).build()
+        recycler.adapter = admobNativeAdAdapter
+
+
 
         val callback = VideoStateItemTouchHelper(
             whichItem = { adapter.currentList.getOrNull(it.bindingAdapterPosition) },

@@ -4,14 +4,18 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
+import android.content.Context
 import android.content.Context.CLIPBOARD_SERVICE
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -20,6 +24,9 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.anjlab.android.iab.v3.BillingProcessor
+import com.anjlab.android.iab.v3.BillingProcessor.IBillingHandler
+import com.anjlab.android.iab.v3.PurchaseInfo
 import com.example.tiktokvideodownloader.R
 import com.example.tiktokvideodownloader.di.provideViewModels
 import com.google.android.material.navigation.NavigationView
@@ -33,6 +40,10 @@ class QueueFragment : Fragment(R.layout.fragment_queue) {
     var navigationView: NavigationView? = null
     var drawerToggle: ActionBarDrawerToggle? = null
     var drawerLayout: DrawerLayout? = null
+    private lateinit var bp: BillingProcessor
+    private lateinit var purchaseInfo: PurchaseInfo
+    private lateinit var preferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
     @SuppressLint("UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,18 +72,20 @@ class QueueFragment : Fragment(R.layout.fragment_queue) {
         input.doAfterTextChanged {
             saveUrlCta.isEnabled = it?.isNotBlank() == true
         }
+        bp.initialize()
         saveUrlCta1.setOnClickListener {
-            val abc: ClipData = myClipboard.primaryClip!!
+           /* val abc: ClipData = myClipboard.primaryClip!!
             val item = abc.getItemAt(0)
 
             val text = item.text.toString()
-            input.setText(text)
+            input.setText(text)*/
         }
         saveUrlCta.setOnClickListener {
             viewModel.onSaveClicked(input.text?.toString().orEmpty())
             input.setText("")
         }
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // The action bar home/up action should open or close the drawer.
         when (item.itemId) {

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -50,7 +51,7 @@ class SplashActivity : AppCompatActivity() {
                 progressBar!!.visibility =View.INVISIBLE
             }
         }.start()
-        Handler().postDelayed({
+        Handler(Looper.myLooper()!!).postDelayed({
             text!!.visibility = View.VISIBLE
         }, 5100)
         text!!.setOnClickListener{

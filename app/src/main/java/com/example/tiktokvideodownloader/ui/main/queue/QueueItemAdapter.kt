@@ -1,5 +1,6 @@
 package com.example.tiktokvideodownloader.ui.main.queue
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.MenuItem
 import android.view.ViewGroup
@@ -29,7 +30,9 @@ class QueueItemAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DownloadActionsViewHolder =
         DownloadActionsViewHolder(parent)
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onBindViewHolder(holder: DownloadActionsViewHolder, position: Int) {
+       // val item1 = holder.bindingAdapterPosition
         val item = getItem(position)
         holder.urlView.text = item.url
         val statusTextRes = when (item) {

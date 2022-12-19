@@ -46,10 +46,8 @@ class VideoDownloadedLocalSource(
             throw StorageException(cause = throwable)
         }
         uri ?: throw StorageException("Uri couldn't be created")
-
         val result = VideoDownloaded(id = videoInProcess.id, url = videoInProcess.url, uri = uri)
         saveVideoDownloaded(result)
-
         return result
     }
 

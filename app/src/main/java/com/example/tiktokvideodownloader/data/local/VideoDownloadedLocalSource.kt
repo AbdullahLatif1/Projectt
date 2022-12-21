@@ -1,5 +1,6 @@
 package com.example.tiktokvideodownloader.data.local
 
+import android.util.Log
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
@@ -60,6 +61,10 @@ class VideoDownloadedLocalSource(
         sharedPreferencesManagerImpl.downloadedVideos = sharedPreferencesManagerImpl.downloadedVideos
             .filterNot { it.getTimeAndOriginal().second.asVideoDownloaded() == videoDownloaded }
             .toSet()
+    }
+
+    fun deleteAll(){
+        sharedPreferencesManagerImpl.downloadedVideos = emptySet<String>().toSet()
     }
 
     companion object {

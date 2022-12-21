@@ -1,5 +1,6 @@
 package com.example.tiktokvideodownloader.di.module
 
+import com.example.tiktokvideodownloader.data.local.VideoDownloadedLocalSource
 import kotlinx.coroutines.Dispatchers
 import com.example.tiktokvideodownloader.data.usecase.AddVideoToQueueUseCase
 import com.example.tiktokvideodownloader.data.usecase.GetUserPreferences
@@ -49,6 +50,8 @@ class UseCaseModule(
     val getUserPreferences: GetUserPreferences get() = GetUserPreferences(localSourceModule.userPreferencesLocalSource)
     val observeUserPreferences: ObserveUserPreferences get() = ObserveUserPreferences(localSourceModule.userPreferencesLocalSource)
     val setUserPreferences: SetUserPreferences get() = SetUserPreferences(localSourceModule.userPreferencesLocalSource)
+
+    val videoDSource : VideoDownloadedLocalSource get() = localSourceModule.videoDownloadedLocalSource
 
     val videoDownloadingProcessorUseCase: VideoDownloadingProcessorUseCase by lazy {
         VideoDownloadingProcessorUseCase(

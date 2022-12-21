@@ -103,6 +103,10 @@ class QueueItemAdapter(
         submitList(mutable)
     }
 
+    fun delete() {
+        submitList(emptyList())
+    }
+
     class DownloadActionsViewHolder(parent: ViewGroup) : MovingItemCallback,
         RecyclerView.ViewHolder(parent.inflate(R.layout.item_downloaded)) {
         val cardView: CardView = itemView as CardView
